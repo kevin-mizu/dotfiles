@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=Android Studio
+Exec=/opt/android-studio/bin/studio.sh
+Icon=/usr/local/share/applications/rofi/icons/android_studio.png
+StartupWMClass=android_studio
