@@ -1,6 +1,8 @@
 #!/bin/bash
 # inspired by https://github.com/Ooggle/dotfiles/
 
+USER=mizu
+
 # intro
 echo ""
 echo "--------------------------------------------------"
@@ -26,12 +28,16 @@ apt install -y xorg i3 i3blocks
 apt install -y build-essential feh maim scrot xclip light pulseaudio \
 ffmpeg imagemagick libncurses5-dev git make xdg-utils pkg-config vim lxappearance \
 gsettings-desktop-schemas xinput ncdu rofi notepadqq libnotify-bin playerctl neofetch \
-bat apt-transport-https curl vlc lxterminal ltrace
+bat apt-transport-https curl vlc lxterminal ltrace htop compton numlockx pavucontrol \
+gcc-multilib fuse libfuse2
 
 # brave
 curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 apt update && apt install -y brave-browser
+
+# gdb gef
+bash -c "$(curl -fsSL https://gef.blah.cat/sh)"
 
 # python
 apt install -y python2 python3 python3-pip python-is-python3
@@ -40,6 +46,13 @@ wget https://bootstrap.pypa.io/pip/2.7/get-pip.py -O /tmp/get-pip.py && python2.
 # discord canary
 wget https://discordapp.com/api/download/canary?platform=linux -O /tmp/discord.deb
 apt install -y /tmp/discord.deb
+
+# docker
+mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+apt update && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+groupadd docker && usermod -aG docker $USER
 
 # config light suid
 chmod +s /usr/bin/light
@@ -64,6 +77,7 @@ git clone https://www.github.com/Airblader/i3 /tmp/i3-gaps && cd /tmp/i3-gaps
 mkdir -p build && cd build
 meson ..
 ninja
+sudo install ./i3 /bin/i3
 
 # remove useless dependences
 apt remove -y meson libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb1-dev \
@@ -88,6 +102,7 @@ chown 1000:1000 -R home/
 cat home/.bashrc >> ~/.bashrc
 rm home/.bashrc
 cp -ar home/. ~/
+chmod +x -R ~/sc/
 
 # usr directory
 cp -ar usr/. /usr/
@@ -107,6 +122,12 @@ xdg-mime default brave-browser.desktop x-scheme-handler/http
 
 # lxterminal as default terminal
 ln -sf /usr/bin/lxterminal /etc/alternatives/x-terminal-emulator
+
+# login manager Ly
+apt install -y libpam0g-dev libxcb-xkb-dev
+git clone --recurse-submodules https://github.com/nullgemm/ly && cd ly
+make && make install
+systemctl disable gdm.service && systemctl enable ly
 
 # cleaning
 echo ""

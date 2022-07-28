@@ -1,4 +1,4 @@
-![banner.png](./images/preview.png)
+![banner.png](./.github/preview.png)
 
 <p align="center">
     My dotfiles repository and installation scripts.
@@ -11,12 +11,12 @@
 ## Installation
 
 ```sh
-curl -L https://raw.githubusercontent.com/kevin-mizu/dotfiles/master/install.sh | sh
+wget https://raw.githubusercontent.com/kevin-mizu/dotfiles/master/install.sh -O /tmp/install.sh && chmod +x /tmp/install.sh && sudo /tmp/install.sh
 ```
 
 ## Softwares
 
-<p align="center">
+<center>
 
 | Software name | Description |
 |:-------------:|:-----------:|
@@ -48,11 +48,11 @@ curl -L https://raw.githubusercontent.com/kevin-mizu/dotfiles/master/install.sh 
 | wireshark | Network and dump analyzer |
 | xclip ||
 
-</p>
+</center>
 
 ## Browser extensions
 
-<p align="center">
+<center>
 
 | Extension name | Description |
 |:--------------:|:-----------:|
@@ -70,4 +70,8 @@ curl -L https://raw.githubusercontent.com/kevin-mizu/dotfiles/master/install.sh 
 | [Temp mail](https://chrome.google.com/webstore/detail/temp-mail-disposable-temp/inojafojbhdpnehkhhfjalgjjobnhomj) ||
 | [Wappalyzer](https://chrome.google.com/webstore/detail/wappalyzer-technology-pro/gppongmhjkpfnbhagpmjfkannfbllamg) ||
 
-</p>
+</center>
+
+## Misc
+
+- [RTL8821CE 802.11ac Wireless Network Adapter](https://github.com/tomaspinho/rtl8821ce)

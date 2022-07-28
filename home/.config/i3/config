@@ -178,8 +178,11 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command i3status
+    status_command i3blocks
 }
+
+# numlock
+exec --no-startup-id numlockx
 
 # Transparent manager
 exec --no-startup-id compton
@@ -191,10 +194,10 @@ gaps inner 7
 for_window [class="^.*"] border pixel 0
 
 # Wallpaper
-exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpaper/$(ls ~/Pictures/wallpaper/ | sort -R | head -1)
+exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/$(ls ~/Pictures/wallpapers/ | sort -R | head -1)
 
 # Lock screen
-bindsym $mod+l exec --no-startup-id ~/.config/i3/lock.sh
+bindsym $mod+l exec --no-startup-id ~/sc/lock.sh
 
 # make a screen capture, copy it in the clipboard
 bindcode 107 exec --no-startup-id maim /tmp/s && cp /tmp/s ~/Pictures/screenshots/`date +"%Y-%m-%d-%H%M%S"`_`identify -format '%wx%h' /tmp/s`.png && xclip -selection clipboard -t image/png /tmp/s
@@ -207,4 +210,4 @@ bindsym --release $mod+p exec --no-startup-id maim -i $(xdotool getactivewindow)
 
 # Brightness
 bindsym XF86MonBrightnessUp exec light -A 15 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 15 # decrease screen brightness 
+bindsym XF86MonBrightnessDown exec light -U 15 # decrease screen brightness
