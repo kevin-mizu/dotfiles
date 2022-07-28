@@ -1,9 +1,23 @@
 #!/bin/bash
 # inspired by https://github.com/Ooggle/dotfiles/
 
+
+echo ""
+echo "--------------------------------------------------"
+echo "              - Installation checks -             "
+echo "--------------------------------------------------"
+echo ""
+
+# must be root
+if [ "$EUID" -ne 0 ]
+    then echo -e "\x1b[1m[\x1b[31m-\x1b[0m] This script must be run as root!"
+    exit
+fi
+
+# home user
 USER=mizu
 
-# intro
+
 echo ""
 echo "--------------------------------------------------"
 echo "            - Auto configure script -             "
@@ -28,16 +42,13 @@ apt install -y xorg i3 i3blocks
 apt install -y build-essential feh maim scrot xclip light pulseaudio \
 ffmpeg imagemagick libncurses5-dev git make xdg-utils pkg-config vim lxappearance \
 gsettings-desktop-schemas xinput ncdu rofi notepadqq libnotify-bin playerctl neofetch \
-bat apt-transport-https curl vlc lxterminal ltrace htop compton numlockx pavucontrol \
-gcc-multilib fuse libfuse2
+bat apt-transport-https curl vlc lxterminal htop compton numlockx pavucontrol \
+gcc-multilib fuse libfuse2 gem ruby-rubygems php
 
 # brave
 curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 apt update && apt install -y brave-browser
-
-# gdb gef
-bash -c "$(curl -fsSL https://gef.blah.cat/sh)"
 
 # python
 apt install -y python2 python3 python3-pip python-is-python3
@@ -56,6 +67,35 @@ groupadd docker && usermod -aG docker $USER
 
 # config light suid
 chmod +s /usr/bin/light
+
+
+# <3
+echo ""
+echo "--------------------------------------------------"
+echo "                  - Cyber Tools -                 "
+echo "--------------------------------------------------"
+echo ""
+
+# pwn
+apt install -y gdb ltrace checksec
+bash -c "$(curl -fsSL https://gef.blah.cat/sh)"
+gem install one_gadget
+sudo -H python3 -m pip install ROPgadget
+
+# network
+echo "wireshark-common wireshark-common/install-setuid boolean true" | debconf-set-selections
+DEBIAN_FRONTEND=noninteractive apt -y install wireshark tshark nmap
+
+# web
+apt install -y gobuster
+
+## postman
+wget https://dl.pstmn.io/download/latest/linux64 -O /opt/postman.tar.gz
+tar -xvf /opt/postman.tar.gz -C /opt/
+rm /opt/postman.tar.gz
+
+# steg
+apt install -y exiftools audacity binwalk foremost
 
 
 # i3 rounded corner
@@ -111,6 +151,7 @@ cp -ar usr/. /usr/
 python -m pip install -r python-requirements.txt
 
 
+# misc
 echo ""
 echo "--------------------------------------------------"
 echo "                - Other configs -"
@@ -128,6 +169,7 @@ apt install -y libpam0g-dev libxcb-xkb-dev
 git clone --recurse-submodules https://github.com/nullgemm/ly && cd ly
 make && make install
 systemctl disable gdm.service && systemctl enable ly
+
 
 # cleaning
 echo ""

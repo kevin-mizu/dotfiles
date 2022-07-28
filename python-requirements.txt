@@ -1,1 +1,12 @@
 Flask
+pwntools
+numpy
+pytesseract
+beautifulsoup4
+pandas
+Pillow
+Scrapy
+asyncio
+pysqlite3
+pipenv
+sagemath
