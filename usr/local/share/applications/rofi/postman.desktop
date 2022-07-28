@@ -5,5 +5,5 @@ Terminal=false
 Type=Application
 Name=Postman
 Exec=/opt/Postman/Postman
-Icon=/usr/local/share/applications/icons/postman.png
+Icon=/usr/local/share/applications/rofi/icons/postman.png
 StartupWMClass=Postman
