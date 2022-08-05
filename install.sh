@@ -147,6 +147,9 @@ chmod +x -R ~/sc/
 # usr directory
 cp -ar usr/. /usr/
 
+# etc directory
+cp -ra etc/. /etc/
+
 # misc
 python -m pip install -r python-requirements.txt
 

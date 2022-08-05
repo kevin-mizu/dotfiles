@@ -211,3 +211,6 @@ bindsym --release $mod+p exec --no-startup-id maim -i $(xdotool getactivewindow)
 # Brightness
 bindsym XF86MonBrightnessUp exec light -A 15 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 15 # decrease screen brightness
+
+# i3blocks
+bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
