@@ -95,7 +95,7 @@ tar -xvf /opt/postman.tar.gz -C /opt/
 rm /opt/postman.tar.gz
 
 # steg
-apt install -y exiftools audacity binwalk foremost
+apt install -y exiftool audacity binwalk foremost
 
 
 # i3 rounded corner
@@ -168,10 +168,10 @@ xdg-mime default brave-browser.desktop x-scheme-handler/http
 ln -sf /usr/bin/lxterminal /etc/alternatives/x-terminal-emulator
 
 # login manager Ly
-apt install -y libpam0g-dev libxcb-xkb-dev
-git clone --recurse-submodules https://github.com/nullgemm/ly && cd ly
-make && make install
-systemctl disable gdm.service && systemctl enable ly
+# apt install -y libpam0g-dev libxcb-xkb-dev
+# git clone --recurse-submodules https://github.com/nullgemm/ly && cd ly
+# make && make install
+# systemctl disable gdm.service && systemctl enable ly
 
 
 # cleaning
