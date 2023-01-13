@@ -4,7 +4,7 @@
     My dotfiles repository and installation scripts.
     <br>
     <img alt="img last commit" src="https://img.shields.io/github/last-commit/kevin-mizu/dot-files.svg">
-    <a href="https://twitter.com/intent/follow?screen_name=Ooggle_" title="Follow"><img src="https://img.shields.io/twitter/follow/kevin_mizu?label=kevin_mizu&style=social"></a>
+    <a href="https://twitter.com/intent/follow?screen_name=kevin_mizu" title="Follow"><img src="https://img.shields.io/twitter/follow/kevin_mizu?label=kevin_mizu&style=social"></a>
     <br>
 </p>
 
